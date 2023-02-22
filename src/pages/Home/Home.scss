@@ -52,6 +52,10 @@
       background-color: #ff4057;
       position: absolute;
       z-index: 0;
+      @media screen and (max-width: 700px) {
+        top: -10px;
+        left: 7px;
+      }
     }
   }
 
@@ -100,11 +104,12 @@
       margin: 0;
     }
     img {
-      width: 75vw;
-      max-height: calc(2 * 75vw / 3);
-      min-height: 240px;
-      min-width: 300px;
-      //   max-width: calc(250px + 10vw);
+      // width: 75vw;
+      max-height: calc(2 * 70vw / 3);
+      max-width: calc(2 * 20vw / 3);
+      min-height: 180px;
+      min-width: 270px;
+      // max-width: calc(250px + 10vw);
       //   height: 60%;
     }
     .post-content {
