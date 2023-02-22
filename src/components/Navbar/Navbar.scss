@@ -1,0 +1,160 @@
+@import url(../../variables.scss);
+
+.center_content {
+  display: flex;
+  align-items: center;
+}
+.write-container {
+  background-color: #ff4057;
+  border-radius: 50%;
+  padding: 10px;
+  border: 5px solid #ff4057;
+  transition: 0.2s ease-in;
+  a {
+    color: #282634;
+    background-color: #ff4057;
+  }
+  &:hover {
+    background-color: #282634;
+
+    a {
+      color: #ff4057;
+      font-weight: 700;
+      background-color: #282634;
+    }
+  }
+}
+.navbar_container {
+  @extend .center_content;
+  position: sticky;
+  z-index: 6;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  padding: 0.6rem;
+  height: 100%;
+  padding-left: calc(2rem + 0.5vw);
+  padding-right: calc(2rem + 0.5vw);
+  filter: drop-shadow(0 0 3px black);
+
+  @media screen and (max-width: 950px) {
+    padding: 0.6rem;
+    padding-left: calc(1rem + 0.5vw);
+    padding-right: calc(1rem + 0.5vw);
+  }
+  @media screen and (max-width: 500px) {
+    padding: 1.3rem;
+  }
+  .navbar_logo {
+    width: 15rem;
+    @media screen and (max-width: 950px) {
+      width: 30%;
+      min-width: 11rem;
+    }
+    @media screen and (max-width: 95px) {
+      width: 10rem;
+    }
+  }
+  .navbar_links {
+    @extend .center_content;
+    gap: 6rem;
+    .links-sub_1 {
+      @extend .center_content;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 21px;
+      @media screen and (max-width: 935px) {
+        display: none;
+      }
+    }
+    .links-sub_2 {
+      @extend .center_content;
+      gap: 18px;
+      flex-direction: row;
+      justify-content: space-between;
+      @media screen and (max-width: 500px) {
+        .loginLink {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.toogle {
+  display: none;
+  cursor: pointer;
+
+  @media screen and (max-width: 935px) {
+    display: block;
+  }
+}
+
+.mobile-menu {
+  position: absolute;
+  z-index: 7;
+  top: 0;
+  left: 0;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  @media screen and (min-width: 935px) {
+    display: none;
+  }
+  .close-button {
+    display: flex;
+    margin-top: 3rem;
+    padding: 0;
+    width: 70vw;
+    cursor: pointer;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #ff4057;
+    border: 3px solid #ff4057;
+    border-radius: 8px;
+    width: 8rem;
+    padding: 1rem;
+    &:hover {
+      background-color: #282634;
+      h2 {
+        color: #fff;
+        background-color: #282634;
+      }
+    }
+
+    h2 {
+      margin: 0;
+      color: #282634;
+      background-color: #ff4057;
+    }
+  }
+  .menu {
+    background-color: rgba(37, 35, 35, 0.753);
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    @extend .center_content;
+    justify-content: center;
+    z-index: 2;
+    a {
+      background-color: rgba(0, 0, 0, 0);
+      padding: 1rem;
+      font-size: calc(18px + 0.5vw);
+      margin-bottom: 2px;
+      margin-top: 2px;
+    }
+  }
+}
+.menu-Links {
+  background-color: rgba(0, 0, 0, 0);
+  display: none;
+  flex-direction: row;
+  width: 20rem;
+  gap: 4rem;
+  justify-content: space-between;
+
+  @media screen and (max-width: 500px) {
+    display: flex;
+  }
+}
