@@ -11,6 +11,7 @@ const Register = () => {
       <hr style={{ height: "100%", fill: "white", margin: 0 }} />
       <div className="sidebar2">
         <div className="login_container">
+          <span>This is an error messagge</span>
           <h1>Register</h1>
           <form>
             <input type="email" placeholder="email" />
@@ -18,11 +19,14 @@ const Register = () => {
             <input type="password" placeholder="password" />
             <button>Register</button>
           </form>
-          <span>This is an error messagge</span>
           <p>
             Already have an account?
             <br />
             <Link to="/login">Login</Link>
+            <hr />
+            <Link to="../" style={{ color: "white" }}>
+              {"<< go home"}
+            </Link>
           </p>
         </div>
       </div>
