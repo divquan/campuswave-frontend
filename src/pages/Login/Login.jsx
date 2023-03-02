@@ -1,8 +1,8 @@
 import React from "react";
-import "../Login/Login.scss";
-import { Link } from "react-router-dom";
+import "./Login.scss";
 import image from "../../assets/logo-no-background.png";
-const Register = () => {
+import { Link } from "react-router-dom";
+const Login = () => {
   return (
     <div className="login_container-main">
       <div className="sidebar">
@@ -11,18 +11,17 @@ const Register = () => {
       <hr style={{ height: "100%", fill: "white", margin: 0 }} />
       <div className="sidebar2">
         <div className="login_container">
-          <h1>Register</h1>
+          <h1>Login</h1>
           <form>
-            <input type="email" placeholder="email" />
             <input type="text" placeholder="username" />
             <input type="password" placeholder="password" />
-            <button>Register</button>
+            <button>Login</button>
           </form>
           <span>This is an error messagge</span>
           <p>
-            Already have an account?
+            Don't have an account?
             <br />
-            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
           </p>
         </div>
       </div>
@@ -30,4 +29,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

@@ -4,12 +4,16 @@
   font-family: "Georgia", serif;
   font-size: 14px;
   padding: 15px;
+
   // width: 100%;
 }
 
 .RichEditor-editor {
+  overflow-x: hidden;
+  overflow-y: scroll;
   border-top: 1px solid #dddddd5e;
   cursor: text;
+  height: 50vh;
   font-size: 16px;
   margin-top: 10px;
 }

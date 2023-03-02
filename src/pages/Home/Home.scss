@@ -62,33 +62,16 @@
   .post-content {
     flex: 4;
     a {
-      outline: none;
-      border: none;
-      height: 1rem;
-      max-width: fit-content;
-      display: flex;
-      align-items: center;
       cursor: pointer;
-      justify-content: center;
       background-color: #ff4057;
       border: 3px solid #ff4057;
       border-radius: 8px;
-      width: 8rem;
-      padding: 1rem;
+      padding: 0.6rem;
+      color: #282634;
+      margin: 0.3rem;
       &:hover {
         background-color: #282634;
-        span {
-          color: #fff;
-          background-color: #282634;
-        }
-      }
-
-      span {
-        font-size: 16px;
-        margin: 0;
-        font-weight: 600;
-        color: #282634;
-        background-color: #ff4057;
+        color: #fff;
       }
     }
   }

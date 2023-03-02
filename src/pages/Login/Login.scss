@@ -1,0 +1,106 @@
+.login_container-main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 530px) {
+    flex-direction: column;
+
+    hr {
+      display: none;
+    }
+  }
+  .sidebar {
+    max-width: 800px;
+    padding: 2rem;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    @media screen and (max-width: 530px) {
+      max-height: 90px;
+    }
+  }
+  .sidebar2 {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    .login_container {
+      // flex: 1;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(20px);
+      border: #ff4057 solid 2px;
+      border-top-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      padding: 2rem;
+      margin: 0;
+      max-width: 600px;
+      h1 {
+        margin: 0;
+        text-align: center;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2rem;
+        input {
+          outline: hidden;
+          border: none;
+          margin-bottom: 12px;
+          font-size: 17px;
+          padding: 8px 4px;
+          border-bottom: 1px solid #fff;
+          transition: 0.4s ease-out;
+          &:focus {
+            outline: none;
+            border: none;
+            border-bottom: 2px solid #ff4057;
+          }
+          ::placeholder {
+            font-size: 17px;
+          }
+        }
+        button {
+          outline: none;
+          margin-top: 0.8rem;
+          padding: 0.5rem;
+          border: #fff solid 2px;
+          font-weight: bold;
+          font-size: 19px;
+          &:focus,
+          &:hover {
+            cursor: pointer;
+            border-color: #ff4057;
+            color: #282634;
+            background-color: #ff4057;
+          }
+        }
+      }
+      span {
+        color: red;
+        font-weight: 100;
+        padding: 6px;
+        font-size: 15px;
+        background-color: rgba(252, 56, 56, 0.247);
+        border-radius: 1.5rem;
+      }
+      p {
+        text-align: center;
+        a {
+          color: #ff4057;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

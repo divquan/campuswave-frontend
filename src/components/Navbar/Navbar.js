@@ -26,9 +26,9 @@ const Navbar = () => {
             <Link className="loginLink" to="/login">
               Login
             </Link>
-            <div className="write-container loginLink">
-              <Link to="/write">Write</Link>
-            </div>
+            <Link className="write-container loginLink" to="/write">
+              Write
+            </Link>
             {toogle ? (
               <MdClose
                 className="toogle"
@@ -55,15 +55,6 @@ const Navbar = () => {
           toogle && (
             <div className="mobile-menu">
               <div className="menu">
-                <div
-                  className="close-button"
-                  onClick={() => {
-                    console.log("clicked");
-                    return setToogle((init) => !init);
-                  }}
-                >
-                  <h2>Close</h2>
-                </div>
                 {categories.map((category) => (
                   <Link
                     className="link"

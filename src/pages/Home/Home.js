@@ -14,9 +14,7 @@ const Home = () => {
             <div className="post-content">
               <h1>{post.title}</h1>
               <p>{post.description}</p>
-              <Link to={`/post/${post.id}`}>
-                <span>Read more</span>
-              </Link>
+              <Link to={`/post/${post.id}`}>Read more</Link>
             </div>
           </div>
         );
