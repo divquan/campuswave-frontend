@@ -1,46 +1,44 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./Login.scss";
-import image from "../../assets/logo-no-background.png";
+import React, { useState } from "react";
+import axios from "axios";
+import "../Login/Login.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import image from "../../assets/logo-no-background.png";
 
-const Login = () => {
+const Register = () => {
   const [error, setError] = useState(null);
+  const timeout = setTimeout(() => setError(null), 3000);
   const navigate = useNavigate();
+  function handleClick() {
+    navigate("/");
+  }
+
   const [inputs, setInputs] = useState({
     username: "",
+    email: "",
     password: "",
   });
-  const [loginBtn, setLoginBtn] = useState("Login");
-  const { login, logout, currentUser } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
+    clearTimeout(timeout);
     e.preventDefault();
-    setError(null);
-    if (currentUser)
-      return setError(`You are logged in as ${currentUser.username}`);
-    setLoginBtn("Logging in...");
     try {
-      await login(inputs);
-      navigate("/");
+      await axios.post("/auth/register", inputs);
+
+      navigate("/login");
     } catch (error) {
       setError(error.response.data);
-      setLoginBtn("Login");
       console.log(error);
     }
   };
-  useEffect(() => {
-    setTimeout(() => setError(null), 5000);
-  }, [error]);
 
   return (
     <div className="login_container-main">
       <div className="sidebar">
-        <img onClick={() => navigate("/")} src={image} alt="" />
+        <img onClick={() => handleClick()} src={image} alt="" />
       </div>
       <hr style={{ height: "100%", fill: "white", margin: 0 }} />
       <div className="sidebar2">
@@ -66,8 +64,15 @@ const Login = () => {
               </span>
             </div>
           )}
-          <h1>Login</h1>
+          <h1>Register</h1>
           <form>
+            <input
+              name="email"
+              type="email"
+              placeholder="email"
+              onChange={handleChange}
+              required={true}
+            />
             <input
               name="username"
               type="text"
@@ -82,30 +87,21 @@ const Login = () => {
               onChange={handleChange}
               required={true}
             />
-            <button onClick={handleSubmit}>{`${loginBtn}`}</button>
+            <button onClick={handleSubmit}>Register</button>
           </form>
           <p>
-            Don't have an account?
+            Already have an account?
             <br />
-            <Link to="/register">Register</Link>
-          </p>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <hr style={{ width: "100%" }} />
+            <Link to="/login">Login</Link>
+            <hr />
             <Link to="../" style={{ color: "white" }}>
               {"<< go home"}
             </Link>
-          </div>
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

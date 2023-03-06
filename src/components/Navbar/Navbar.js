@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.scss";
 import logo from "../../assets/logo-no-background.png";
 import { categories } from "../../Data";
 import { MdClose, MdMenu } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 //toogle true means
 const Navbar = () => {
   const [toogle, setToogle] = useState(false);
+  const { logout, currentUser } = useContext(AuthContext);
 
   return (
     <>
@@ -23,12 +25,20 @@ const Navbar = () => {
             ))}
           </div>
           <div className="links-sub_2">
-            <Link className="loginLink" to="/login">
-              Login
-            </Link>
-            <Link className="write-container loginLink" to="/write">
-              Write
-            </Link>
+            {currentUser ? (
+              <>
+                <span onClick={() => logout()} style={{ cursor: "pointer" }}>
+                  Logout
+                </span>
+                <Link className="write-container loginLink" to="/write">
+                  Write
+                </Link>
+              </>
+            ) : (
+              <Link className="loginLink" to="/login">
+                Login <i>to write</i>
+              </Link>
+            )}
             {toogle ? (
               <MdClose
                 className="toogle"
