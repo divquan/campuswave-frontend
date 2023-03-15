@@ -7,7 +7,7 @@ export const categories = [
   { name: "UENR", link: "uenr" },
   { name: "More", link: "more" },
 ];
-export const posts = [
+export const testPosts = [
   {
     id: 1,
     title: "This is a title",

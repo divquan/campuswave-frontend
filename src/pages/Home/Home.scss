@@ -24,8 +24,12 @@
   }
   .img {
     position: relative;
+    min-width: 350px;
+    min-height: 320px;
     img {
       position: relative;
+      width: 350px;
+      height: 320px;
       width: 350px;
       height: 320px;
       object-fit: cover;
