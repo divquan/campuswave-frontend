@@ -8,24 +8,33 @@ import axios from "axios";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(null);
   const cat = useLocation().search;
   const fetchPosts = async (cat) => {
     try {
       const res = await axios.get(`/posts/${cat}`);
+      setLoading(true);
       setPosts(res.data);
+      setLoading(false);
       console.log(res.data);
-      console.log(typeof res.data);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchPosts(cat);
   }, [cat]);
 
   return (
     <div className="home-container">
-      {typeof posts ? (
+      {loading && (
+        <h1 className="loading" data-text="It's loading…">
+          It's loading…
+        </h1>
+      )}
+      {posts &&
         posts?.map((post, index) => (
           <div key={index} className="home-post">
             <div className="img">
@@ -41,10 +50,7 @@ const Home = () => {
               <Link to={`/post/${post.id}`}>Read more</Link>
             </div>
           </div>
-        ))
-      ) : (
-        <h1>Could not load posts, please try again later</h1>
-      )}
+        ))}
     </div>
   );
 };

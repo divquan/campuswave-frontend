@@ -8,6 +8,7 @@ const Register = () => {
   const [error, setError] = useState(null);
   const timeout = setTimeout(() => setError(null), 3000);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState("Register");
   function handleClick() {
     navigate("/");
   }
@@ -24,12 +25,15 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     clearTimeout(timeout);
+
     e.preventDefault();
     try {
+      setLoading("Registering...");
       await axios.post("/auth/register", inputs);
 
       navigate("/login");
     } catch (error) {
+      setLoading("Register");
       setError(error.response.data);
       console.log(error);
     }
@@ -87,7 +91,7 @@ const Register = () => {
               onChange={handleChange}
               required={true}
             />
-            <button onClick={handleSubmit}>Register</button>
+            <button onClick={handleSubmit}>{loading}</button>
           </form>
           <p>
             Already have an account?

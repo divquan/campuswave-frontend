@@ -18,8 +18,8 @@ const Navbar = () => {
         </Link>
         <div className="navbar_links">
           <div className="links-sub_1">
-            {categories.map((category) => (
-              <Link className="link" to={`/?cat=${category.link}`}>
+            {categories.map((category, index) => (
+              <Link className="link" key={index} to={`/?cat=${category.link}`}>
                 {category.name}
               </Link>
             ))}
@@ -65,8 +65,9 @@ const Navbar = () => {
           toogle && (
             <div className="mobile-menu">
               <div className="menu">
-                {categories.map((category) => (
+                {categories.map((category, index) => (
                   <Link
+                    key={index}
                     className="link"
                     to={`/?cat=${category.link}`}
                     onClick={() => setToogle((init) => !init)}

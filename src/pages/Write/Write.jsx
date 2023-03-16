@@ -3,28 +3,52 @@ import "./Write.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const Write = () => {
-  const [value, setValue] = useState("");
-  const [category, setCategory] = useState("");
-  const [title, setTitle] = useState("");
-  const [file, setFile] = useState("");
+  const state = useLocation().state;
+  const [value, setValue] = useState(state?.title || "");
+  const [title, setTitle] = useState(state?.desc || "");
+  const [file, setFile] = useState(null);
+  const [cat, setCategory] = useState(state?.cat || "");
+  const navigate = useNavigate();
 
   const upload = async () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/upload", file);
-      console.log("file", res.data);
+      const res = await axios.post("/upload", formData);
+      return res.data;
     } catch (err) {
       console.log(err);
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    upload();
-  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const imgUrl = await upload();
+
+    try {
+      state
+        ? await axios.put(`/posts/${state.id}`, {
+            title,
+            desc: value,
+            cat,
+            img: file ? imgUrl : "",
+          })
+        : await axios.post(`/posts/`, {
+            title,
+            desc: value,
+            cat,
+            img: file ? imgUrl : "",
+            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+          });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="write_container-main">
       {/* <h1 style={{ marginLeft: " 0 0 0 4rem" }}>EDIT:</h1> */}
@@ -56,7 +80,7 @@ const Write = () => {
               style={{ display: "none" }}
               name="file"
               id="file"
-              onChange={(e) => setFile(e.target.value)}
+              onChange={(e) => setFile(e.target.files[0])}
             />
             <label htmlFor="file" className="file">
               Upload image...
