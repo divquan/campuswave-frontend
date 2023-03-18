@@ -13,7 +13,7 @@ const Write = () => {
   const [file, setFile] = useState(null);
   const [cat, setCategory] = useState(state?.cat || "");
   const navigate = useNavigate();
-
+  const [status, setStatus] = useState("Publish");
   const upload = async () => {
     try {
       const formData = new FormData();
@@ -27,6 +27,7 @@ const Write = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("Publishing...");
     const imgUrl = await upload();
 
     try {
@@ -44,8 +45,10 @@ const Write = () => {
             img: file ? imgUrl : "",
             date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
           });
+      setStatus("Published 😉");
       navigate("/");
     } catch (err) {
+      setStatus("Couldn't publish...");
       console.log(err);
     }
   };
@@ -72,6 +75,7 @@ const Write = () => {
             <p>
               <b>Status: </b>Draft
             </p>
+            
             <p>
               <b>Visibilty: </b>Public
             </p>
@@ -86,7 +90,7 @@ const Write = () => {
               Upload image...
             </label>
             <div className="buttons">
-              <button onClick={handleSubmit}>Publish</button>
+              <button onClick={handleSubmit}>{status}</button>
               <button>Save as Draft</button>
             </div>
           </div>

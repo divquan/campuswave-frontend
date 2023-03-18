@@ -8,12 +8,11 @@ import axios from "axios";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(true);
   const cat = useLocation().search;
   const fetchPosts = async (cat) => {
     try {
       const res = await axios.get(`/posts/${cat}`);
-      setLoading(true);
       setPosts(res.data);
       setLoading(false);
       console.log(res.data);
@@ -24,6 +23,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchPosts(cat);
   }, [cat]);
 
@@ -34,7 +34,7 @@ const Home = () => {
           It's loading…
         </h1>
       )}
-      {posts &&
+      {!loading &&
         posts?.map((post, index) => (
           <div key={index} className="home-post">
             <div className="img">
