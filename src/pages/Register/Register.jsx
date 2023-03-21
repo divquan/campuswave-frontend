@@ -29,7 +29,10 @@ const Register = () => {
     e.preventDefault();
     try {
       setLoading("Registering...");
-      await axios.post("/auth/register", inputs);
+      await axios.post(
+        "https://campus-backend.onrender.com/api/posts/auth/register",
+        inputs
+      );
 
       navigate("/login");
     } catch (error) {

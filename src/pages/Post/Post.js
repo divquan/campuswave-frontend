@@ -13,7 +13,9 @@ const Post = () => {
 
   const fetchPosts = async (postId) => {
     try {
-      const res = await axios.get(`/posts/${postId}`);
+      const res = await axios.get(
+        `https://campus-backend.onrender.com/api/posts/${postId}`
+      );
       setPost(res.data);
       console.log(res.data);
     } catch (err) {

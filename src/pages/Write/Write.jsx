@@ -32,12 +32,15 @@ const Write = () => {
 
     try {
       state
-        ? await axios.put(`/posts/${state.id}`, {
-            title,
-            desc: value,
-            cat,
-            img: file ? imgUrl : "",
-          })
+        ? await axios.put(
+            `https://campus-backend.onrender.com/api/posts//posts/${state.id}`,
+            {
+              title,
+              desc: value,
+              cat,
+              img: file ? imgUrl : "",
+            }
+          )
         : await axios.post(`/posts/`, {
             title,
             desc: value,
@@ -75,7 +78,7 @@ const Write = () => {
             <p>
               <b>Status: </b>Draft
             </p>
-            
+
             <p>
               <b>Visibilty: </b>Public
             </p>

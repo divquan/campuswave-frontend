@@ -8,11 +8,16 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
   const login = async (inputs) => {
-    const res = await axios.post("/auth/login", inputs);
+    const res = await axios.post(
+      "https://campus-backend.onrender.com/api/auth/login",
+      inputs
+    );
     setCurrentUser(res.data);
   };
   const logout = async () => {
-    const res = await axios.post("/auth/logout");
+    const res = await axios.post(
+      "https://campus-backend.onrender.com/api/auth/logout"
+    );
     console.log(res);
     setCurrentUser(null);
   };

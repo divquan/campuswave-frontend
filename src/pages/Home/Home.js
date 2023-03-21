@@ -12,7 +12,9 @@ const Home = () => {
   const cat = useLocation().search;
   const fetchPosts = async (cat) => {
     try {
-      const res = await axios.get(`/posts/${cat}`);
+      const res = await axios.get(
+        `https://campus-backend.onrender.com/api/posts/${cat}`
+      );
       setPosts(res.data);
       setLoading(false);
       console.log(res.data);
