@@ -1,7 +1,10 @@
 .post_container {
   margin: 4rem auto;
-  width: 60vw;
-
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   .post_image {
     aspect-ratio: calc(16 / 9);
     img {
@@ -56,8 +59,15 @@
   }
   h1 {
     font-size: calc(2rem + 1.2vw);
-    margin-bottom: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+    @media screen and (max-width: 600px) {
+      font-size: 2rem;
+      line-height: 2rem;
+    }
   }
-  // .post_content {
-  // }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    margin: 10px;
+  }
 }
