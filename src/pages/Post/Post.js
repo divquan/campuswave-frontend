@@ -17,7 +17,7 @@ const Post = () => {
         `https://campus-backend.onrender.com/api/posts/${postId}`
       );
       setPost(res.data);
-      console.log(res.data);
+      console.log("response::" + res.data + res.data.isArray());
     } catch (err) {
       console.log(err);
     }
@@ -25,7 +25,6 @@ const Post = () => {
   useEffect(() => {
     fetchPosts(postId);
   }, [postId]);
-  console.log(post);
   return (
     <div className="post_container">
       <div className="post_image">

@@ -30,7 +30,7 @@ const Register = () => {
     try {
       setLoading("Registering...");
       await axios.post(
-        "https://campus-backend.onrender.com/api/posts/auth/register",
+        "https://campus-backend.onrender.com/api/auth/register",
         inputs
       );
 

@@ -3,7 +3,7 @@ import "./Write.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Form, useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 
 const Write = () => {
@@ -14,47 +14,35 @@ const Write = () => {
   const [cat, setCategory] = useState(state?.cat || "");
   const navigate = useNavigate();
   const [status, setStatus] = useState("Publish");
-  const upload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await axios.post("/upload", formData);
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const postData = new FormData();
     setStatus("Publishing...");
-    const imgUrl = await upload();
+    postData.append("title", title);
+    postData.append("description", value);
+    postData.append("file", file);
+    postData.append("category", cat);
+    // for (var pair of postData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
 
+    // axios.post("https://campus-backend.onrender.com/api/posts");
     try {
-      state
-        ? await axios.put(
-            `https://campus-backend.onrender.com/api/posts//posts/${state.id}`,
-            {
-              title,
-              desc: value,
-              cat,
-              img: file ? imgUrl : "",
-            }
-          )
-        : await axios.post(`/posts/`, {
-            title,
-            desc: value,
-            cat,
-            img: file ? imgUrl : "",
-            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-          });
-      setStatus("Published 😉");
-      navigate("/");
-    } catch (err) {
-      setStatus("Couldn't publish...");
-      console.log(err);
+      const res = await axios.post(
+        "https://campus-backend.onrender.com/api/posts",
+        postData
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => setStatus("Publish"), 5000);
+  }, [status]);
+
   return (
     <div className="write_container-main">
       {/* <h1 style={{ marginLeft: " 0 0 0 4rem" }}>EDIT:</h1> */}
@@ -64,6 +52,7 @@ const Write = () => {
             type="text"
             placeholder="Title..."
             value={title}
+            name="title"
             onChange={(e) => {
               setTitle(e.target.value);
             }}
