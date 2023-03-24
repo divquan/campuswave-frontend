@@ -3,45 +3,65 @@ import "./Write.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
-import { Form, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 
 const Write = () => {
   const state = useLocation().state;
   const [value, setValue] = useState(state?.title || "");
   const [title, setTitle] = useState(state?.desc || "");
-  const [file, setFile] = useState(null);
   const [cat, setCategory] = useState(state?.cat || "");
   const navigate = useNavigate();
   const [status, setStatus] = useState("Publish");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imgUrl, setImgUrl] = useState(state?.imgUrl || "");
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+  const upload = async () => {
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:10000/upload",
+        formData
+      );
+      setImgUrl(response.data);
+      console.log("done");
+    } catch (error) {
+      console.error(error);
+      setStatus("Couldn't publish");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // upload();
     const postData = new FormData();
     setStatus("Publishing...");
     postData.append("title", title);
     postData.append("description", value);
-    postData.append("file", file);
     postData.append("category", cat);
-    // for (var pair of postData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
+    postData.append("uid", 13);
 
-    // axios.post("https://campus-backend.onrender.com/api/posts");
     try {
       const res = await axios.post(
-        "https://campus-backend.onrender.com/api/posts",
+        "http://localhost:10000/api/posts/",
         postData
       );
+      setStatus("Published");
       console.log(res);
     } catch (error) {
       console.log(error);
+      setStatus("Couldn't publish");
     }
   };
 
-  useEffect(() => {
-    setTimeout(() => setStatus("Publish"), 5000);
-  }, [status]);
+  // useEffect(() => {
+  //   setTimeout(() => setStatus("Publish"), 5000);
+  // }, [status]);
 
   return (
     <div className="write_container-main">
@@ -73,10 +93,10 @@ const Write = () => {
             </p>
             <input
               type="file"
-              style={{ display: "none" }}
+              // style={{ display: "none" }}
               name="file"
               id="file"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={handleFileSelect}
             />
             <label htmlFor="file" className="file">
               Upload image...
