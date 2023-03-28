@@ -16,7 +16,7 @@ const Home = () => {
       const res = await axios.get(
         `https://campus-backend.onrender.com/api/posts/${cat}`
       );
-      setPosts(res.data);
+      setPosts(res.data.sort((a, b) => b - a));
       setLoading(false);
       console.log(res.data);
     } catch (err) {

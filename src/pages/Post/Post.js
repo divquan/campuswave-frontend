@@ -48,7 +48,9 @@ const Post = () => {
         </div>
       </div>
       <h1>{post.title}</h1>
-      <div className="post_content">{post.description}</div>
+      <div className="post_content">
+        <div dangerouslySetInnerHTML={{ __html: post.description }} />
+      </div>
     </div>
   );
 };
