@@ -24,8 +24,6 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    clearTimeout(timeout);
-
     e.preventDefault();
     try {
       setLoading("Registering...");

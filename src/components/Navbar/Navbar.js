@@ -5,6 +5,8 @@ import { categories } from "../../Data";
 import { MdClose, MdMenu } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import UserLink from "./UserLink";
 //toogle true means
 const Navbar = () => {
   const [toogle, setToogle] = useState(false);
@@ -27,12 +29,10 @@ const Navbar = () => {
           <div className="links-sub_2">
             {currentUser ? (
               <>
-                <span onClick={() => logout()} style={{ cursor: "pointer" }}>
-                  Logout
-                </span>
-                <Link className="write-container loginLink" to="/write">
-                  Write
-                </Link>
+                <div className="write">
+                  <Link to="/write">Write</Link>
+                </div>
+                <UserLink />
               </>
             ) : (
               <Link className="loginLink" to="/login">
@@ -90,6 +90,7 @@ const Navbar = () => {
           )
         }
       </div>
+      <ErrorMessage></ErrorMessage>
     </>
   );
 };

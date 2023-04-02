@@ -25,7 +25,7 @@
 .navbar_container {
   @extend .center_content;
   position: sticky;
-  z-index: 6;
+  z-index: 5;
   top: 0;
   left: 0;
   justify-content: space-between;
@@ -75,6 +75,12 @@
           display: none;
         }
       }
+
+      a {
+        border-radius: 0.5rem;
+        padding: 0.2rem 0.5rem;
+        border: solid 2.5px #ff4057;
+      }
     }
   }
 }
@@ -90,7 +96,7 @@
 
 .mobile-menu {
   position: absolute;
-  z-index: 7;
+  z-index: 4;
   top: 0;
   left: 0;
   height: 100vh;
@@ -134,7 +140,7 @@
     flex-direction: column;
     @extend .center_content;
     justify-content: center;
-    z-index: 2;
+    z-index: 3;
     a {
       background-color: rgba(0, 0, 0, 0);
       padding: 1rem;

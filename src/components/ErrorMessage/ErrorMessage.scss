@@ -1,0 +1,27 @@
+.error-message {
+  position: absolute;
+  background-color: rgb(255, 0, 0);
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #721c24;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  bottom: 4rem;
+  z-index: 15;
+  width: 18rem;
+  text-align: center;
+  left: calc(50% - 9rem);
+  box-shadow: rgba(0, 0, 0, 0.712) 0rem 0 20px 3px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: black 0rem 0 20px 3px;
+    background-color: rgb(245, 54, 54);
+  }
+  p {
+    background-color: inherit;
+    font-size: 17px;
+    margin: 0;
+  }
+}
