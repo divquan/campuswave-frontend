@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import UserLink from "./UserLink";
-//toogle true means
+
 const Navbar = () => {
   const [toogle, setToogle] = useState(false);
   const { logout, currentUser } = useContext(AuthContext);
