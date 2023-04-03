@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import image from "../../assets/logo-black.png";
 import "./Post.scss";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 // import profile from "../../assets/profile.jpg";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 
 const Post = () => {
   const [post, setPost] = useState({});
   const link = useLocation().pathname;
   const postId = link.split("/")[2];
-
+  const { currentUser } = useContext(AuthContext);
   const fetchPosts = async (postId) => {
     try {
       const res = await axios.get(
@@ -41,10 +42,14 @@ const Post = () => {
           </div>
         </div>
         <div className="post_menu-right">
-          <Link to="/write?edit=2">
-            <AiFillEdit size={24} className="edit" />
-          </Link>
-          <AiFillDelete size={24} className="delete" />
+          {currentUser?.id === post.uid && (
+            <>
+              <Link to="/write?edit=2">
+                <AiFillEdit size={24} className="edit" />
+              </Link>
+              <AiFillDelete size={24} className="delete" />
+            </>
+          )}
         </div>
       </div>
       <h1>{post.title}</h1>

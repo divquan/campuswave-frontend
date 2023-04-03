@@ -29,10 +29,17 @@ const Write = () => {
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
   };
+  //client-side post validation
   const upload = async () => {
-    if (value.length < 12 || !title || !cat || !selectedFile) {
-      return setError({ show: true, message: "Field(s) cannot be empty" });
-    }
+    if (!title)
+      return setError({ show: true, message: " Title cannot be empty" });
+    if (value.length < 15)
+      return setError({ show: true, message: " Description cannot be empty" });
+    if (!cat)
+      return setError({ show: true, message: "Please select category" });
+    if (!selectedFile)
+      return setError({ show: true, message: "Please choose an image" });
+
     const formData = new FormData();
     formData.append("file", selectedFile);
     try {
@@ -43,7 +50,6 @@ const Write = () => {
       );
       setPublish(true);
       setImgUrl(response.data.url);
-      console.log(imgUrl);
     } catch (error) {
       console.error(error);
       setStatus("Couldn't upload");
@@ -82,9 +88,8 @@ const Write = () => {
 
   return (
     <>
-      {currentUser ? (
+      {true ? (
         <div className="write_container-main">
-          {/* <h1 style={{ marginLeft: " 0 0 0 4rem" }}>EDIT:</h1> */}
           <div className="write_container">
             <div className="write_container-left">
               <input
