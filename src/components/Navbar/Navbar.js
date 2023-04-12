@@ -52,7 +52,11 @@ const Navbar = () => {
               />
             ) : (
               <MdMenu
-                style={{ zIndex: 15, position: "relative" }}
+                style={{
+                  zIndex: 15,
+                  position: "relative",
+                  backgroundColor: "rgba(0, 0,0,0,)",
+                }}
                 size={32}
                 className="toogle"
                 onClick={() => setToogle((init) => !init)}
@@ -63,7 +67,12 @@ const Navbar = () => {
         {
           //menu for mobile and some tablet screens
           toogle && (
-            <div className="mobile-menu">
+            <div
+              className="mobile-menu-modal"
+              onClick={(e) => {
+                e.target.className === "mobile-menu-modal" && setToogle(false);
+              }}
+            >
               <div className="menu">
                 {categories.map((category, index) => (
                   <Link
@@ -76,14 +85,14 @@ const Navbar = () => {
                   </Link>
                 ))}
                 {
-                  <div className="menu-Links">
-                    <Link className="loginLink" to="/login">
-                      Login
-                    </Link>
-                    <div className="write-container loginLink">
-                      <Link to="/write">Write</Link>
-                    </div>
-                  </div>
+                  // <div className="menu-Links">
+                  //   <Link className="loginLink" to="/login">
+                  //     Login
+                  //   </Link>
+                  //   <div className="write-container loginLink">
+                  //     <Link to="/write">Write</Link>
+                  //   </div>
+                  // </div>
                 }
               </div>
             </div>
