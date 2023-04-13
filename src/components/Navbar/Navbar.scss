@@ -71,16 +71,10 @@
       flex-direction: row;
       justify-content: space-between;
       position: relative;
-      @media screen and (max-width: 500px) {
-        .loginLink {
+      @media screen and (max-width: 400px) {
+        .writebtn {
           display: none;
         }
-      }
-
-      a {
-        border-radius: 0.5rem;
-        padding: 0.2rem 0.5rem;
-        border: solid 2.5px #ff4057;
       }
     }
   }
@@ -112,7 +106,7 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-start;
     z-index: 4;
     right: 0;
@@ -122,12 +116,12 @@
     animation-duration: 0.7s;
     animation-timing-function: ease-out;
 
-    a {
+    .mobile-menu-items {
       background-color: rgba(0, 0, 0, 0);
       padding: 1rem 1rem 0 4rem;
       text-align: right;
       width: 100%;
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       border-radius: 6px;
       border: rgba(0, 0, 0, 0) solid 2px;
       outline: none;
@@ -141,6 +135,11 @@
       &:active,
       &:focus {
         border: #ff4057 solid 2px;
+      }
+    }
+    .mobile-menu-sitems {
+      a {
+        font-size: 1.25rem;
       }
     }
   }
