@@ -29,9 +29,9 @@ const Navbar = () => {
           <div className="links-sub_2">
             {currentUser ? (
               <>
-                <div className="write">
-                  <Link to="/write">Write</Link>
-                </div>
+                <Link to="/write" className="btn-outline writebtn">
+                  Write
+                </Link>
                 <UserLink />
               </>
             ) : (
@@ -77,23 +77,27 @@ const Navbar = () => {
                 {categories.map((category, index) => (
                   <Link
                     key={index}
-                    className="link"
+                    className="mobile-menu-items"
                     to={`/?cat=${category.link}`}
                     onClick={() => setToogle((init) => !init)}
                   >
                     {category.name}
                   </Link>
                 ))}
-                {
-                  // <div className="menu-Links">
-                  //   <Link className="loginLink" to="/login">
-                  //     Login
-                  //   </Link>
-                  //   <div className="write-container loginLink">
-                  //     <Link to="/write">Write</Link>
-                  //   </div>
-                  // </div>
-                }
+                <hr style={{ width: "90%", margin: "2rem 0" }} />
+                <div className="mobile-menu-subitems">
+                  {currentUser ? (
+                    <>
+                      <Link to="/write" className="btn-outline">
+                        Write
+                      </Link>
+                    </>
+                  ) : (
+                    <Link className="btn-outline" to="/login">
+                      Login <i>to write</i>
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
           )

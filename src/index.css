@@ -63,3 +63,35 @@ a:hover {
 }
 
 /* Firefox */
+
+.btn-outline {
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border: solid 2.5px #ff4057;
+}
+
+.btn-outline:hover {
+  cursor: pointer;
+  background-color: #ff4056b0;
+
+}
+
+.btn-fill {
+  border-radius: 0.5rem;
+  outline: none;
+  padding: 0.5rem;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #ff4057;
+  color: #282634;
+  font-weight: 600;
+
+
+}
+
+.btn-fill:hover {
+  cursor: pointer;
+  background-color: #ff4056b0;
+
+}

@@ -1,11 +1,10 @@
 .error-message {
   position: fixed;
-  background-color: rgb(255, 0, 0);
+  background-color: rgba(255, 0, 0, 0.925);
   border-radius: 0.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #721c24;
   padding: 0.4rem;
   margin-bottom: 1rem;
   bottom: 4rem;
@@ -20,8 +19,12 @@
     background-color: rgb(245, 54, 54);
   }
   p {
-    background-color: inherit;
+    background-color: rgba(255, 0, 0, 0.075);
     font-size: 17px;
+    stroke: black;
+    stroke-opacity: 1;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
     margin: 0;
   }
 }

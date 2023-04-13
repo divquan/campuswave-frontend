@@ -128,7 +128,11 @@ const Write = () => {
                   Upload image...
                 </label>
                 <div className="buttons">
-                  <button onClick={upload} disabled={publish}>
+                  <button
+                    className="btn-fill"
+                    onClick={upload}
+                    disabled={publish}
+                  >
                     {status}
                   </button>
                   {/* <button>Save as Draft</button> */}

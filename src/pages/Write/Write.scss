@@ -85,21 +85,6 @@
       display: flex;
       margin-top: 2rem;
       justify-content: space-between;
-      button {
-        outline: none;
-        padding: 0.5rem;
-        font-size: 16px;
-        cursor: pointer;
-      }
-      :first-child {
-        border: 2px solid #ff4057;
-        color: #ff4057;
-      }
-      :last-child {
-        border: 2px solid #ff4057;
-        background-color: #ff4057;
-        color: black;
-      }
     }
   }
   .write_categories {

@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Home.scss";
 import Img from "../../assets/logo-black.png";
 import Loader from "../../components/Loader/Loader";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const cat = useLocation().search;
   const [apistatus, setApistatus] = useState(null);
+  const { setError } = useContext(GlobalContext);
 
   const fetchPosts = async (cat) => {
     try {
@@ -21,6 +23,7 @@ const Home = () => {
       console.log(res.data);
     } catch (err) {
       console.log(err);
+      setError({ show: true, message: err.message });
       setLoading(false);
       setApistatus(err);
     }
