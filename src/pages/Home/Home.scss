@@ -35,10 +35,13 @@
       object-fit: cover;
       border-top-left-radius: 30px;
       border-bottom-right-radius: 30px;
-      border: white 2px dashed;
+      border: white 1px dashed;
       flex: 3;
       transition: 0.4s ease-in-out;
       z-index: 2;
+      min-height: 150px;
+      min-width: 130px;
+      background-color: rgba(0, 0, 0, 0);
       &:hover {
         border: #ff4057 2px s;
         border: white 2px solid;

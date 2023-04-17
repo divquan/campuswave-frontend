@@ -6,6 +6,7 @@ import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import DOMPurify from "dompurify";
 
 const Post = () => {
   const [post, setPost] = useState({});
@@ -18,7 +19,7 @@ const Post = () => {
         `https://campus-backend.onrender.com/api/posts/${postId}`
       );
       setPost(res.data);
-      console.log("response::" + res.data + res.data.isArray());
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -41,20 +42,27 @@ const Post = () => {
             <span>{post.date}</span>
           </div>
         </div>
-        <div className="post_menu-right">
-          {currentUser?.id === post.uid && (
-            <>
-              <Link to="/write?edit=2">
-                <AiFillEdit size={24} className="edit" />
-              </Link>
-              <AiFillDelete size={24} className="delete" />
-            </>
-          )}
-        </div>
+        {currentUser?.username === post.username && (
+          <div className="post_menu-right">
+            <Link to="/write?edit=2">
+              <AiFillEdit size={24} className="edit" />
+            </Link>
+            <AiFillDelete size={24} className="delete" />
+          </div>
+        )}
       </div>
       <h1>{post.title}</h1>
       <div className="post_content">
-        <div dangerouslySetInnerHTML={{ __html: post.description }} />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(post?.description),
+          }}
+        />
+        {/* <div
+          dangerouslySetInnerHTML={{
+            __html: post?.description,
+          }}
+        /> */}
       </div>
     </div>
   );

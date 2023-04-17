@@ -32,13 +32,29 @@ const Write = () => {
   //client-side post validation
   const upload = async () => {
     if (!title)
-      return setError({ show: true, message: " Title cannot be empty" });
+      return setError({
+        color: "red",
+        show: true,
+        message: " Title cannot be empty",
+      });
     if (value.length < 15)
-      return setError({ show: true, message: " Description cannot be empty" });
+      return setError({
+        color: "red",
+        show: true,
+        message: " Description cannot be empty",
+      });
     if (!cat)
-      return setError({ show: true, message: "Please select category" });
+      return setError({
+        color: "red",
+        show: true,
+        message: "Please select category",
+      });
     if (!selectedFile)
-      return setError({ show: true, message: "Please choose an image" });
+      return setError({
+        color: "red",
+        show: true,
+        message: "Please choose an image",
+      });
 
     const formData = new FormData();
     formData.append("file", selectedFile);
@@ -73,6 +89,11 @@ const Write = () => {
         postData
       );
       setStatus("Published");
+      setError({
+        color: "green",
+        message: "Post has been published",
+        show: true,
+      });
       console.log(res);
     } catch (error) {
       console.log(error);

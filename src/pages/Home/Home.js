@@ -5,6 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { GlobalContext } from "../../context/GlobalContext";
+import DOMPurify from "dompurify";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -23,7 +24,7 @@ const Home = () => {
       console.log(res.data);
     } catch (err) {
       console.log(err);
-      setError({ show: true, message: err.message });
+      setError({ show: true, message: err.message, color: "red" });
       setLoading(false);
       setApistatus(err);
     }
@@ -51,7 +52,11 @@ const Home = () => {
             </div>
             <div className="post-content">
               <h1>{post.title}</h1>
-              <p>{post.description?.slice(0, 250)}</p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(post.description?.slice(0, 250)),
+                }}
+              ></p>
               <Link to={`/post/${post.id}`}>Read more</Link>
             </div>
           </div>
