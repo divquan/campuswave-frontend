@@ -15,6 +15,8 @@ export const testPosts = [
       "If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project. Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. ",
     date: "13 November 2023",
     img: Img,
+    username: "divquan",
+    cat: "ucc",
   },
   {
     id: 2,
@@ -23,6 +25,8 @@ export const testPosts = [
       "If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project. Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. ",
     date: "13 November 2023",
     img: Img,
+    username: "divquan",
+    cat: "ug",
   },
   {
     id: 3,
@@ -31,6 +35,8 @@ export const testPosts = [
       "If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project. Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. ",
     date: "13 November 2023",
     img: Img,
+    username: "divquan",
+    cat: "knust",
   },
   {
     id: 4,
@@ -39,6 +45,8 @@ export const testPosts = [
       "If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project. Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. ",
     date: "13 November 2023",
     img: Img,
+    username: "divquan",
+    cat: "knust",
   },
   {
     id: 5,
@@ -47,6 +55,8 @@ export const testPosts = [
       "If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project. Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. ",
     date: "13 November 2023",
     img: Img,
+    username: "divquan",
+    cat: "knust",
   },
   {
     id: 6,
@@ -55,5 +65,7 @@ export const testPosts = [
       "If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project. Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. ",
     date: "13 November 2023",
     img: Img,
+    username: "divquan",
+    cat: "knust",
   },
 ];

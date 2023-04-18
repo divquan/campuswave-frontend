@@ -10,8 +10,8 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Write = () => {
   const state = useLocation().state;
-  const [value, setValue] = useState(state?.title || "");
-  const [title, setTitle] = useState(state?.desc || "");
+  const [value, setValue] = useState(state?.description || "");
+  const [title, setTitle] = useState(state?.title || "");
   const [cat, setCategory] = useState(state?.cat || "");
   const navigate = useNavigate();
   const [status, setStatus] = useState("Publish");
@@ -29,8 +29,29 @@ const Write = () => {
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-  //client-side post validation
   const upload = async () => {
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    try {
+      setStatus("Uploading...");
+      const response = await axios.post(
+        "https://campus-backend.onrender.com/api/upload",
+        formData
+      );
+      console.log(1);
+      setPublish(true);
+      setImgUrl(response.data.url);
+      setStatus("almost done...");
+    } catch (error) {
+      console.error(error);
+      setStatus("Couldn't upload");
+      setTimeout(() => setStatus("Publish"), 4000);
+      console.log(2);
+      return setError({ show: true, message: error.message, color: "red" });
+    }
+  };
+  const handleSubmit = async () => {
+    //client-side post validation
     if (!title)
       return setError({
         color: "red",
@@ -56,34 +77,16 @@ const Write = () => {
         message: "Please choose an image",
       });
 
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-    try {
-      setStatus("Uploading...");
-      const response = await axios.post(
-        "https://campus-backend.onrender.com/api/upload",
-        formData
-      );
-      setPublish(true);
-      setImgUrl(response.data.url);
-    } catch (error) {
-      console.error(error);
-      setStatus("Couldn't upload");
-      setTimeout(() => setStatus("Publish"), 4000);
-      return setError({ show: true, message: error.message });
-    }
-  };
-  const handleSubmit = async () => {
     setStatus("Publishing...");
-    setPublish(false);
-    const postData = new FormData();
-    postData.append("title", title);
-    postData.append("description", value);
-    postData.append("category", cat);
-    postData.append("uid", currentUser.id);
-    postData.append("url", imgUrl);
 
     try {
+      setPublish(false);
+      const postData = new FormData();
+      postData.append("title", title);
+      postData.append("description", value);
+      postData.append("category", cat);
+      postData.append("uid", currentUser.id);
+      postData.append("url", imgUrl);
       const res = await axios.post(
         "https://campus-backend.onrender.com/api/posts/",
         postData
@@ -170,6 +173,7 @@ const Write = () => {
                     type="radio"
                     value="knust"
                     onChange={(e) => setCategory(e.target.value)}
+                    checked={cat === "knust" && true}
                   />
                   <label htmlFor="knust">KNUST</label>
                 </div>
@@ -181,6 +185,7 @@ const Write = () => {
                     type="radio"
                     value="ug"
                     onChange={(e) => setCategory(e.target.value)}
+                    checked={cat === "ug" && true}
                   />
                   <label htmlFor="ug">UG</label>
                 </div>
@@ -192,6 +197,7 @@ const Write = () => {
                     type="radio"
                     value="uner"
                     onChange={(e) => setCategory(e.target.value)}
+                    checked={cat === "uner" && true}
                   />
                   <label htmlFor="uner">UNER</label>
                 </div>
@@ -203,6 +209,7 @@ const Write = () => {
                     type="radio"
                     value="uds"
                     onChange={(e) => setCategory(e.target.value)}
+                    checked={cat === "uds" && true}
                   />
                   <label htmlFor="uds">UDS</label>
                 </div>
@@ -214,6 +221,7 @@ const Write = () => {
                     type="radio"
                     value="ucc"
                     onChange={(e) => setCategory(e.target.value)}
+                    checked={cat === "ucc" && true}
                   />
                   <label htmlFor="ucc">UCC</label>
                 </div>
@@ -225,6 +233,7 @@ const Write = () => {
                     type="radio"
                     value="umat"
                     onChange={(e) => setCategory(e.target.value)}
+                    checked={cat === "umat" && true}
                   />
                   <label htmlFor="umat">UMat</label>
                 </div>
@@ -236,6 +245,7 @@ const Write = () => {
                     type="radio"
                     value="uew"
                     onChange={(e) => setCategory(e.target.value)}
+                    checked={cat === "uew" && true}
                   />
                   <label htmlFor="uew">UCC</label>
                 </div>

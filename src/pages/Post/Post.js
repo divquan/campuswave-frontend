@@ -7,6 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import DOMPurify from "dompurify";
+import { testPosts } from "../../Data";
 
 const Post = () => {
   const [post, setPost] = useState({});
@@ -44,7 +45,7 @@ const Post = () => {
         </div>
         {currentUser?.username === post.username && (
           <div className="post_menu-right">
-            <Link to="/write?edit=2">
+            <Link to={`/write?edit=${postId}`} state={post}>
               <AiFillEdit size={24} className="edit" />
             </Link>
             <AiFillDelete size={24} className="delete" />
