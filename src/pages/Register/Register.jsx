@@ -92,7 +92,9 @@ const Register = () => {
               onChange={handleChange}
               required={true}
             />
-            <button onClick={handleSubmit}>{loading}</button>
+            <button className="btn-fill-large" onClick={handleSubmit}>
+              {loading}
+            </button>
           </form>
           <p>
             Already have an account?

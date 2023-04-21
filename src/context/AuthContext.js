@@ -10,7 +10,8 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (inputs) => {
     const res = await axios.post(
       "https://campus-backend.onrender.com/api/auth/login",
-      inputs
+      inputs,
+      { withCredentials: true }
     );
     setCurrentUser(res.data);
   };

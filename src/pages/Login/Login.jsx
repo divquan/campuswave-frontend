@@ -12,6 +12,7 @@ const Login = () => {
     password: "",
   });
   const [loginBtn, setLoginBtn] = useState("Login");
+  const [status, setStatus] = useState(false);
   const { login, logout, currentUser } = useContext(AuthContext);
 
   const handleChange = (e) => {
@@ -21,6 +22,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setStatus(true);
     if (currentUser)
       return setError(`You are logged in as ${currentUser.username}`);
     setLoginBtn("Logging in...");
@@ -31,6 +33,7 @@ const Login = () => {
       setError(error.response.data);
       setLoginBtn("Login");
       console.log(error);
+      setStatus(true);
     }
   };
   useEffect(() => {
@@ -82,7 +85,13 @@ const Login = () => {
               onChange={handleChange}
               required={true}
             />
-            <button onClick={handleSubmit}>{`${loginBtn}`}</button>
+            <button
+              onClick={handleSubmit}
+              className={
+                status ? "btn-fill-large  btn-disabled" : "btn-fill-large"
+              }
+              disabled={status}
+            >{`${loginBtn}`}</button>
           </form>
           <p>
             Don't have an account?
