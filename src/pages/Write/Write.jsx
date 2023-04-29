@@ -10,14 +10,18 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Write = () => {
   const state = useLocation().state;
+  const param = useLocation().search.split("=")[0]; //check url if we are editing or creating a new post
   const [value, setValue] = useState(state?.description || "");
   const [title, setTitle] = useState(state?.title || "");
   const [cat, setCategory] = useState(state?.cat || "");
   const navigate = useNavigate();
-  const [status, setStatus] = useState("Publish");
+  const [status, setStatus] = useState(
+    param === "?edit" ? "Update" : "Publish"
+  );
   const [selectedFile, setSelectedFile] = useState(null);
   const [publish, setPublish] = useState(false);
   const { logout, currentUser } = useContext(AuthContext);
+  const [event, setEvent] = useState(false); //track whether a user is posting a new post or editing an existing post
 
   const { setError } = useContext(GlobalContext);
 
@@ -30,14 +34,18 @@ const Write = () => {
     setSelectedFile(event.target.files[0]);
   };
   const upload = async () => {
+    if (!selectedFile)
+      //if we are editing, we don't want to check if an image is selected
+      return setError({
+        color: "red",
+        show: true,
+        message: "Please choose an image",
+      });
     const formData = new FormData();
     formData.append("file", selectedFile);
     try {
       setStatus("Uploading...");
-      const response = await axios.post(
-        "https://campus-backend.onrender.com/api/upload",
-        formData
-      );
+      const response = await axios.post("/upload", formData);
       console.log(1);
       setPublish(true);
       setImgUrl(response.data.url);
@@ -70,14 +78,8 @@ const Write = () => {
         show: true,
         message: "Please select category",
       });
-    if (!selectedFile)
-      return setError({
-        color: "red",
-        show: true,
-        message: "Please choose an image",
-      });
 
-    setStatus("Publishing...");
+    setStatus(param === "?edit" ? "Publishing..." : "Updating...");
 
     try {
       setPublish(false);
@@ -85,16 +87,17 @@ const Write = () => {
       postData.append("title", title);
       postData.append("description", value);
       postData.append("category", cat);
-      postData.append("uid", currentUser.id);
-      postData.append("url", imgUrl);
-      const res = await axios.post(
-        "https://campus-backend.onrender.com/api/posts/",
-        postData
-      );
+      param !== "?edit" && postData.append("uid", currentUser.id); // if we are not editing, we add user id
+      param !== "?edit" && postData.append("url", imgUrl); //if we are not editing, we  add image url
+      param === "?edit" && postData.append("id", state.id); //if we are editing, send post data to user
+      const res =
+        param === "?edit"
+          ? await axios.put("/posts/", postData)
+          : await axios.post(`/posts/`, postData);
       setStatus("Published");
       setError({
         color: "green",
-        message: "Post has been published",
+        message: res.data,
         show: true,
       });
       console.log(res);
@@ -109,7 +112,7 @@ const Write = () => {
       handleSubmit();
     }
   }, [publish]);
-
+  console.log(param);
   return (
     <>
       {true ? (
@@ -154,7 +157,7 @@ const Write = () => {
                 <div className="buttons">
                   <button
                     className="btn-fill"
-                    onClick={upload}
+                    onClick={param === "?edit" ? handleSubmit : upload} //if we are editing, we want to update the post, else we want to upload the image
                     disabled={publish}
                   >
                     {status}

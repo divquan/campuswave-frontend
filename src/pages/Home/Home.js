@@ -16,9 +16,7 @@ const Home = () => {
 
   const fetchPosts = async (cat) => {
     try {
-      const res = await axios.get(
-        `https://campus-backend.onrender.com/api/posts/${cat}`
-      );
+      const res = await axios.get(`/posts/${cat}`);
       setPosts(res.data.reverse());
       setLoading(false);
       console.log(res.data);

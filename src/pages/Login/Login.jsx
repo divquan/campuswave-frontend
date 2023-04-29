@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Login.scss";
-import image from "../../assets/logo-no-background.png";
+import image from "../../assets/logo-no-background.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -12,7 +12,7 @@ const Login = () => {
     password: "",
   });
   const [loginBtn, setLoginBtn] = useState("Login");
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState(false); // true if a request is being sent. Disable button if true
   const { login, logout, currentUser } = useContext(AuthContext);
 
   const handleChange = (e) => {
@@ -22,7 +22,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    setStatus(true);
+    setStatus(true); //disable button
     if (currentUser)
       return setError(`You are logged in as ${currentUser.username}`);
     setLoginBtn("Logging in...");
@@ -33,7 +33,7 @@ const Login = () => {
       setError(error.response.data);
       setLoginBtn("Login");
       console.log(error);
-      setStatus(true);
+      setStatus(false);
     }
   };
   useEffect(() => {

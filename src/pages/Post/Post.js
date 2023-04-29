@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Post.scss";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 // import profile from "../../assets/profile.jpg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import DOMPurify from "dompurify";
@@ -14,13 +14,21 @@ const Post = () => {
   const link = useLocation().pathname;
   const postId = link.split("/")[2];
   const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const fetchPosts = async (postId) => {
     try {
-      const res = await axios.get(
-        `https://campus-backend.onrender.com/api/posts/${postId}`
-      );
+      const res = await axios.get(`/posts/${postId}`);
       setPost(res.data);
       console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleDelete = async () => {
+    try {
+      const res = axios.delete(`/posts/${postId}`);
+      await res;
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -48,7 +56,7 @@ const Post = () => {
             <Link to={`/write?edit=${postId}`} state={post}>
               <AiFillEdit size={24} className="edit" />
             </Link>
-            <AiFillDelete size={24} className="delete" />
+            <AiFillDelete size={24} className="delete" onClick={handleDelete} />
           </div>
         )}
       </div>
