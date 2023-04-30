@@ -115,7 +115,7 @@ const Write = () => {
   console.log(param);
   return (
     <>
-      {true ? (
+      {currentUser ? (
         <div className="write_container-main">
           <div className="write_container">
             <div className="write_container-left">
