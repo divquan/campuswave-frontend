@@ -45,7 +45,7 @@ const Write = () => {
     formData.append("file", selectedFile);
     try {
       setStatus("Uploading...");
-      const response = await axios.post("/upload", formData);
+      const response = await axios.post("api/upload", formData);
       console.log(1);
       setPublish(true);
       setImgUrl(response.data.url);
@@ -92,8 +92,8 @@ const Write = () => {
       param === "?edit" && postData.append("id", state.id); //if we are editing, send post data to user
       const res =
         param === "?edit"
-          ? await axios.put("/posts/", postData)
-          : await axios.post(`/posts/`, postData);
+          ? await axios.put("api/posts/", postData)
+          : await axios.post(`api/posts/`, postData);
       setStatus("Published");
       setError({
         color: "green",
