@@ -16,7 +16,7 @@ const Home = () => {
 
   const fetchPosts = async (cat) => {
     try {
-      const res = await axios.get(`/posts/${cat}`);
+      const res = await axios.get(`api/posts/${cat}`);
       setPosts(res.data.reverse());
       setLoading(false);
       console.log(res.data);
