@@ -17,7 +17,9 @@ const Post = () => {
   const navigate = useNavigate();
   const fetchPosts = async (postId) => {
     try {
-      const res = await axios.get(`api/posts/${postId}`);
+      const res = await axios.get(
+        `https://campuswave.netlify.app/api/posts/${postId}`
+      );
       setPost(res.data);
       console.log(res.data);
     } catch (err) {
@@ -26,7 +28,9 @@ const Post = () => {
   };
   const handleDelete = async () => {
     try {
-      const res = axios.delete(`api/posts/${postId}`);
+      const res = axios.delete(
+        `https://campuswave.netlify.app/api/posts/${postId}`
+      );
       await res;
       navigate("/");
     } catch (err) {

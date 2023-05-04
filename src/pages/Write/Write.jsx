@@ -45,7 +45,10 @@ const Write = () => {
     formData.append("file", selectedFile);
     try {
       setStatus("Uploading...");
-      const response = await axios.post("api/upload", formData);
+      const response = await axios.post(
+        "https://campuswave.netlify.app/api/upload",
+        formData
+      );
       console.log(1);
       setPublish(true);
       setImgUrl(response.data.url);
@@ -92,8 +95,14 @@ const Write = () => {
       param === "?edit" && postData.append("id", state.id); //if we are editing, send post data to user
       const res =
         param === "?edit"
-          ? await axios.put("api/posts/", postData)
-          : await axios.post(`api/posts/`, postData);
+          ? await axios.put(
+              "https://campuswave.netlify.app/api/posts/",
+              postData
+            )
+          : await axios.post(
+              `https://campuswave.netlify.app/api/posts/`,
+              postData
+            );
       setStatus("Published");
       setError({
         color: "green",

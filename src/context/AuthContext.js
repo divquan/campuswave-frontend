@@ -8,13 +8,19 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
   const login = async (inputs) => {
-    const res = await axios.post("/api/auth/login", inputs, {
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      "https://campuswave.netlify.app/api/auth/login",
+      inputs,
+      {
+        withCredentials: true,
+      }
+    );
     setCurrentUser(res.data);
   };
   const logout = async () => {
-    const res = await axios.post("api/auth/logout");
+    const res = await axios.post(
+      "https://campuswave.netlify.app/api/auth/logout"
+    );
     console.log(res);
     setCurrentUser(null);
   };

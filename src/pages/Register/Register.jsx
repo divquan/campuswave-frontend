@@ -27,7 +27,10 @@ const Register = () => {
     e.preventDefault();
     try {
       setLoading("Registering...");
-      await axios.post("api/auth/register", inputs);
+      await axios.post(
+        "https://campuswave.netlify.app/api/auth/register",
+        inputs
+      );
 
       navigate("/login");
     } catch (error) {
