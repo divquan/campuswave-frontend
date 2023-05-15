@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Login.scss";
-import image from "../../assets/logo-no-background.svg";
+import image from "../../assets/logo-no-background.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
