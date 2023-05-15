@@ -14,19 +14,19 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar_container">
+      <div className="navbar">
         <Link to="/" className="navbar_logo">
           <img src={logo} alt="" />
         </Link>
         <div className="navbar_links">
-          <div className="links-sub_1">
+          <div className="navbar_links--sub_1">
             {categories.map((category, index) => (
               <Link className="link" key={index} to={`/?cat=${category.link}`}>
                 {category.name}
               </Link>
             ))}
           </div>
-          <div className="links-sub_2">
+          <div className="navbar_links--sub_2">
             {currentUser ? (
               <>
                 <Link to="/write" className="btn-outline writebtn">
@@ -41,7 +41,7 @@ const Navbar = () => {
             )}
             {toogle ? (
               <MdClose
-                className="toogle"
+                className="navbar_btn--toogle"
                 style={{
                   zIndex: 15,
                   position: "relative",
@@ -51,14 +51,14 @@ const Navbar = () => {
                 onClick={() => setToogle((init) => !init)}
               />
             ) : (
-              <MdMenu
+              <MdMenu 
                 style={{
                   zIndex: 15,
                   position: "relative",
                   backgroundColor: "rgba(0, 0,0,0,)",
                 }}
                 size={32}
-                className="toogle"
+                className="navbar_btn--toogle"
                 onClick={() => setToogle((init) => !init)}
               />
             )}
@@ -68,16 +68,16 @@ const Navbar = () => {
           //menu for mobile and some tablet screens
           toogle && (
             <div
-              className="mobile-menu-modal"
+              className="navbar_mobile__modal"
               onClick={(e) => {
-                e.target.className === "mobile-menu-modal" && setToogle(false);
+                e.target.className === "navbar_mobile__modal" && setToogle(false);
               }}
             >
-              <div className="menu">
+              <div className="navbar_mobile__menu">
                 {categories.map((category, index) => (
                   <Link
                     key={index}
-                    className="mobile-menu-items"
+                    className="navbar_mobile__menu--items_1"
                     to={`/?cat=${category.link}`}
                     onClick={() => setToogle((init) => !init)}
                   >
@@ -85,7 +85,7 @@ const Navbar = () => {
                   </Link>
                 ))}
                 <hr style={{ width: "90%", margin: "2rem 0" }} />
-                <div className="mobile-menu-subitems">
+                <div className="navbar_mobile__menu--items_2">
                   {currentUser ? (
                     <>
                       <Link to="/write" className="btn-outline">
