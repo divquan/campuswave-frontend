@@ -7,6 +7,13 @@ export const categories = [
   { name: "UENR", link: "uenr" },
   { name: "More", link: "more" },
 ];
+export const pages = [
+  { name: "Home", link: "/" },
+  { name: "Posts", link: "/posts" },
+  { name: "Categories", link: "/posts/categories" },
+  { name: "Contact", link: "/contact" },
+  { name: "About", link: "/about-us" },
+];
 export const testPosts = [
   {
     id: 1,

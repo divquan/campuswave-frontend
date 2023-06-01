@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import "./Navbar.scss";
 import logo from "../../assets/logo-no-background.png";
-import { categories } from "../../Data";
+import { categories, pages } from "../../Data";
 import { MdClose, MdMenu } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import UserLink from "./UserLink";
@@ -11,18 +11,21 @@ import UserLink from "./UserLink";
 const Navbar = () => {
   const [toogle, setToogle] = useState(false);
   const { logout, currentUser } = useContext(AuthContext);
+  const currentLocation = useLocation().pathname;
+  const active = (navLink) =>
+    navLink === currentLocation ? "navbar__link--active" : "navbar__link";
 
   return (
     <>
       <div className="navbar">
         <Link to="/" className="navbar_logo">
-          <img src={logo} alt="" />
+          <img src={logo} alt="campuswave logo" />
         </Link>
         <div className="navbar_links">
           <div className="navbar_links--sub_1">
-            {categories.map((category, index) => (
-              <Link className="link" key={index} to={`/?cat=${category.link}`}>
-                {category.name}
+            {pages.map((page, index) => (
+              <Link className={active(page.link)} key={index} to={page.link}>
+                {page.name}
               </Link>
             ))}
           </div>
@@ -51,7 +54,7 @@ const Navbar = () => {
                 onClick={() => setToogle((init) => !init)}
               />
             ) : (
-              <MdMenu 
+              <MdMenu
                 style={{
                   zIndex: 15,
                   position: "relative",
@@ -70,7 +73,8 @@ const Navbar = () => {
             <div
               className="navbar_mobile__modal"
               onClick={(e) => {
-                e.target.className === "navbar_mobile__modal" && setToogle(false);
+                e.target.className === "navbar_mobile__modal" &&
+                  setToogle(false);
               }}
             >
               <div className="navbar_mobile__menu">
